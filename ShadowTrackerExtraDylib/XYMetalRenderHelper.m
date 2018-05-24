@@ -6,10 +6,6 @@
 //  Copyright © 2018年 xiaoyuan. All rights reserved.
 //
 /**
- AGXA7FamilyRenderContext
- AGXA8FamilyRenderContext
- AGXA9FamilyRenderContext
- AGXA10FamilyRenderContext
  AGXA11FamilyRenderContext
  */
 #import "XYMetalRenderHelper.h"
@@ -17,6 +13,7 @@
 @implementation XYMetalRenderHelper
 
 static NSUInteger _instanceCount = 100;
+static BOOL _weedOutWeeds = YES;
 
 + (NSUInteger)instanceCount {
     return _instanceCount;
@@ -24,6 +21,14 @@ static NSUInteger _instanceCount = 100;
 
 + (void)setInstanceCount:(NSUInteger)instanceCount {
     _instanceCount = instanceCount;
+}
+
++ (BOOL)weedOutWeeds {
+    return _weedOutWeeds;
+}
+
++ (void)setWeedOutWeeds:(BOOL)weedOutWeeds {
+    _weedOutWeeds = weedOutWeeds;
 }
 
 @end

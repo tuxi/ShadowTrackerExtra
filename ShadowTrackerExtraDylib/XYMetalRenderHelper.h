@@ -11,5 +11,6 @@
 @interface XYMetalRenderHelper : NSObject
 
 @property (nonatomic, assign, class) NSUInteger instanceCount;
+@property (nonatomic, assign, class) BOOL weedOutWeeds;
 
 @end

@@ -9,6 +9,7 @@
     
 }
 - (void)xy_sliderValueChanged:(id)sender;
+- (void)xy_switchValueChanged:(id)sender;
 
 @end
 
@@ -25,16 +26,32 @@
     slider.continuous = YES;
     [slider addTarget:self action:@selector(xy_sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:slider];
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:28.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.32 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-10.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:20.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.2 constant:0.0].active = YES;
     [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:20.0].active = YES;
+    
+    UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
+    sw.on = XYMetalRenderHelper.weedOutWeeds;
+    sw.translatesAutoresizingMaskIntoConstraints = NO;
+    [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self addSubview:sw];
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
+    [sw setTransform:CGAffineTransformScale(sw.transform, 0.5, 0.5)];
     return self;
 }
+
+
 %new
--(void)xy_sliderValueChanged:(id)sender{
+-(void)xy_sliderValueChanged:(id)sender {
     UISlider *slider = (UISlider *)sender;
     XYMetalRenderHelper.instanceCount = slider.value;
+}
+%new
+-(void)xy_switchValueChanged:(id)sender {
+    UISwitch *sw = (UISwitch *)sender;
+    XYMetalRenderHelper.weedOutWeeds = sw.isOn;
 }
 %end
 %end
@@ -210,77 +227,6 @@
     return res;
 }
 
-%end
-%end
-
-%group MetalKit
-%hook MTLDebugRenderCommandEncoder
-- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
-    if(instanceCount > XYMetalRenderHelper.instanceCount) {
-        return;
-    }
-    @try {
-        %orig;
-    }
-    
-    @catch (NSException *exp) {
-        NSLog(@"%@\n%@", exp.reason, exp.callStackSymbols);
-    }
-    
-}
-
--(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset {
-    
-    %orig;
-}
-
-- (void)setVertexBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index {
-    %orig;
-}
-
-/*!
- @method setVertexBuffer:offset:atIndex:
- @brief Set a global buffer for all vertex shaders at the given bind point index.
- */
-- (void)setVertexBuffer:(id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index {
-    %orig;
-}
-
-/*!
- @method setVertexBufferOffset:atIndex:
- @brief Set the offset within the current global buffer for all vertex shaders at the given bind point index.
- */
-- (void)setVertexBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index  {
-    %orig;
-}
-
-- (NSUInteger)tileWidth {
-    NSUInteger tileWidth = %orig;
-    return tileWidth;
-}
-
-- (NSUInteger)tileHeight {
-    NSUInteger tileHeight = %orig;
-    return tileHeight;
-}
-
-%end
-
-%hook MTLToolsRenderCommandEncoder
-- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
-    
-    %orig;
-    
-}
-
-%end
-
-%hook MTLTelemetryRenderCommandEncoder
-- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
-    
-    %orig;
-    
-}
 %end
 %end
 
@@ -585,6 +531,77 @@
 }
 + (void)log:(id)arg1 {
     %orig;
+}
+%end
+%end
+
+%group MetalKit
+%hook MTLDebugRenderCommandEncoder
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+    if(instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
+        return;
+    }
+    @try {
+        %orig;
+    }
+    
+    @catch (NSException *exp) {
+        NSLog(@"%@\n%@", exp.reason, exp.callStackSymbols);
+    }
+    
+}
+
+-(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset {
+    
+    %orig;
+}
+
+- (void)setVertexBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index {
+    %orig;
+}
+
+/*!
+ @method setVertexBuffer:offset:atIndex:
+ @brief Set a global buffer for all vertex shaders at the given bind point index.
+ */
+- (void)setVertexBuffer:(id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index {
+    %orig;
+}
+
+/*!
+ @method setVertexBufferOffset:atIndex:
+ @brief Set the offset within the current global buffer for all vertex shaders at the given bind point index.
+ */
+- (void)setVertexBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index  {
+    %orig;
+}
+
+- (NSUInteger)tileWidth {
+    NSUInteger tileWidth = %orig;
+    return tileWidth;
+}
+
+- (NSUInteger)tileHeight {
+    NSUInteger tileHeight = %orig;
+    return tileHeight;
+}
+
+%end
+
+%hook MTLToolsRenderCommandEncoder
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+    
+    %orig;
+    
+}
+
+%end
+
+%hook MTLTelemetryRenderCommandEncoder
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+    
+    %orig;
+    
 }
 %end
 %end
