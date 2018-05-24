@@ -1,0 +1,757 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D021E85320B40E2400F91ECC /* BBURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = D021E85120B40E2300F91ECC /* BBURLProtocol.m */; };
+		D021E85420B40E2400F91ECC /* BBURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = D021E85220B40E2300F91ECC /* BBURLProtocol.h */; };
+		D098365F20B5534A00283D1D /* XYMetalRenderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */; };
+		D098366020B5534A00283D1D /* XYMetalRenderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */; };
+		D0E48D8420B2B4E0001E2815 /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0E48D8320B2B4E0001E2815 /* MDConfig.plist */; };
+		D0E48D8E20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0E48D8D20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D0E48D9320B2B4E0001E2815 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E48D9220B2B4E0001E2815 /* JavaScriptCore.framework */; };
+		D0E48D9520B2B4E0001E2815 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E48D9420B2B4E0001E2815 /* Foundation.framework */; };
+		D0E48D9720B2B4E0001E2815 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E48D9620B2B4E0001E2815 /* UIKit.framework */; };
+		D0E48D9C20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0E48D9B20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm */; };
+		D0E48D9F20B2B4E0001E2815 /* MDConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E48D9E20B2B4E0001E2815 /* MDConfigManager.h */; };
+		D0E48DA120B2B4E0001E2815 /* MDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DA020B2B4E0001E2815 /* MDConfigManager.m */; };
+		D0E48DA320B2B4E0001E2815 /* MDCycriptManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E48DA220B2B4E0001E2815 /* MDCycriptManager.h */; };
+		D0E48DA520B2B4E0001E2815 /* MDCycriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DA420B2B4E0001E2815 /* MDCycriptManager.m */; };
+		D0E48DA720B2B4E0001E2815 /* MDMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E48DA620B2B4E0001E2815 /* MDMethodTrace.h */; };
+		D0E48DA920B2B4E0001E2815 /* MDMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DA820B2B4E0001E2815 /* MDMethodTrace.m */; };
+		D0E48DAB20B2B4E0001E2815 /* ANYMethodLog.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E48DAA20B2B4E0001E2815 /* ANYMethodLog.h */; };
+		D0E48DAD20B2B4E0001E2815 /* ANYMethodLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DAC20B2B4E0001E2815 /* ANYMethodLog.m */; };
+		D0E48DB020B2B4E0001E2815 /* LLDBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E48DAF20B2B4E0001E2815 /* LLDBTools.h */; };
+		D0E48DB220B2B4E0001E2815 /* LLDBTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DB120B2B4E0001E2815 /* LLDBTools.mm */; };
+		D0E48DB720B2B4E0001E2815 /* AntiAntiDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DB620B2B4E0001E2815 /* AntiAntiDebug.m */; };
+		D0E48DBA20B2B4E0001E2815 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DB920B2B4E0001E2815 /* fishhook.c */; };
+		D0E48DBC20B2B4E0001E2815 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E48DBB20B2B4E0001E2815 /* fishhook.h */; };
+		D0E48DBE20B2B4E0001E2815 /* ShadowTrackerExtraDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E48DBD20B2B4E0001E2815 /* ShadowTrackerExtraDylib.h */; };
+		D0E48DC020B2B4E0001E2815 /* ShadowTrackerExtraDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E48DBF20B2B4E0001E2815 /* ShadowTrackerExtraDylib.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D0E48D8F20B2B4E0001E2815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0E48D7020B2B4E0001E2815 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0E48D8C20B2B4E0001E2815;
+			remoteInfo = ShadowTrackerExtraDylib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D0E48D7820B2B4E0001E2815 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D0E48D8E20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D021E85120B40E2300F91ECC /* BBURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBURLProtocol.m; sourceTree = "<group>"; };
+		D021E85220B40E2300F91ECC /* BBURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBURLProtocol.h; sourceTree = "<group>"; };
+		D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYMetalRenderHelper.h; sourceTree = "<group>"; };
+		D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYMetalRenderHelper.m; sourceTree = "<group>"; };
+		D0E48D7B20B2B4E0001E2815 /* ShadowTrackerExtra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShadowTrackerExtra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0E48D7E20B2B4E0001E2815 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		D0E48D7F20B2B4E0001E2815 /* Target.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Target.plist; sourceTree = "<group>"; };
+		D0E48D8120B2B4E0001E2815 /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "quick-resign.sh"; path = "Scripts/quick-resign.sh"; sourceTree = "<group>"; };
+		D0E48D8320B2B4E0001E2815 /* MDConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = MDConfig.plist; path = Config/MDConfig.plist; sourceTree = "<group>"; };
+		D0E48D8620B2B4E0001E2815 /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
+		D0E48D8720B2B4E0001E2815 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0E48D8D20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libShadowTrackerExtraDylib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0E48D9220B2B4E0001E2815 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		D0E48D9420B2B4E0001E2815 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D0E48D9620B2B4E0001E2815 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D0E48D9A20B2B4E0001E2815 /* ShadowTrackerExtraDylib.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = ShadowTrackerExtraDylib.xm; path = Logos/ShadowTrackerExtraDylib.xm; sourceTree = "<group>"; };
+		D0E48D9B20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = ShadowTrackerExtraDylib.mm; path = Logos/ShadowTrackerExtraDylib.mm; sourceTree = "<group>"; };
+		D0E48D9E20B2B4E0001E2815 /* MDConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDConfigManager.h; path = Config/MDConfigManager.h; sourceTree = "<group>"; };
+		D0E48DA020B2B4E0001E2815 /* MDConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDConfigManager.m; path = Config/MDConfigManager.m; sourceTree = "<group>"; };
+		D0E48DA220B2B4E0001E2815 /* MDCycriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDCycriptManager.h; path = Config/MDCycriptManager.h; sourceTree = "<group>"; };
+		D0E48DA420B2B4E0001E2815 /* MDCycriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDCycriptManager.m; path = Config/MDCycriptManager.m; sourceTree = "<group>"; };
+		D0E48DA620B2B4E0001E2815 /* MDMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDMethodTrace.h; path = Config/MDMethodTrace.h; sourceTree = "<group>"; };
+		D0E48DA820B2B4E0001E2815 /* MDMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDMethodTrace.m; path = Config/MDMethodTrace.m; sourceTree = "<group>"; };
+		D0E48DAA20B2B4E0001E2815 /* ANYMethodLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ANYMethodLog.h; path = Config/ANYMethodLog.h; sourceTree = "<group>"; };
+		D0E48DAC20B2B4E0001E2815 /* ANYMethodLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ANYMethodLog.m; path = Config/ANYMethodLog.m; sourceTree = "<group>"; };
+		D0E48DAF20B2B4E0001E2815 /* LLDBTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LLDBTools.h; path = Tools/LLDBTools.h; sourceTree = "<group>"; };
+		D0E48DB120B2B4E0001E2815 /* LLDBTools.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = LLDBTools.mm; path = Tools/LLDBTools.mm; sourceTree = "<group>"; };
+		D0E48DB420B2B4E0001E2815 /* ShadowTrackerExtraDylib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShadowTrackerExtraDylib-Prefix.pch"; sourceTree = "<group>"; };
+		D0E48DB620B2B4E0001E2815 /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AntiAntiDebug.m; path = AntiAntiDebug/AntiAntiDebug.m; sourceTree = "<group>"; };
+		D0E48DB920B2B4E0001E2815 /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
+		D0E48DBB20B2B4E0001E2815 /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
+		D0E48DBD20B2B4E0001E2815 /* ShadowTrackerExtraDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowTrackerExtraDylib.h; sourceTree = "<group>"; };
+		D0E48DBF20B2B4E0001E2815 /* ShadowTrackerExtraDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowTrackerExtraDylib.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D0E48D7520B2B4E0001E2815 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0E48D8A20B2B4E0001E2815 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0E48D9320B2B4E0001E2815 /* JavaScriptCore.framework in Frameworks */,
+				D0E48D9720B2B4E0001E2815 /* UIKit.framework in Frameworks */,
+				D0E48D9520B2B4E0001E2815 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D0E48D6F20B2B4E0001E2815 = {
+			isa = PBXGroup;
+			children = (
+				D0E48D7D20B2B4E0001E2815 /* ShadowTrackerExtra */,
+				D0E48D9820B2B4E0001E2815 /* ShadowTrackerExtraDylib */,
+				D0E48D9120B2B4E0001E2815 /* Frameworks */,
+				D0E48D7C20B2B4E0001E2815 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0E48D7C20B2B4E0001E2815 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48D7B20B2B4E0001E2815 /* ShadowTrackerExtra.app */,
+				D0E48D8D20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0E48D7D20B2B4E0001E2815 /* ShadowTrackerExtra */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48D7E20B2B4E0001E2815 /* icon.png */,
+				D0E48D7F20B2B4E0001E2815 /* Target.plist */,
+				D0E48D8720B2B4E0001E2815 /* Info.plist */,
+				D0E48D8020B2B4E0001E2815 /* Scripts */,
+				D0E48D8220B2B4E0001E2815 /* Config */,
+				D0E48D8520B2B4E0001E2815 /* TargetApp */,
+			);
+			path = ShadowTrackerExtra;
+			sourceTree = "<group>";
+		};
+		D0E48D8020B2B4E0001E2815 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48D8120B2B4E0001E2815 /* quick-resign.sh */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		D0E48D8220B2B4E0001E2815 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48D8320B2B4E0001E2815 /* MDConfig.plist */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		D0E48D8520B2B4E0001E2815 /* TargetApp */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48D8620B2B4E0001E2815 /* put ipa or app here */,
+			);
+			name = TargetApp;
+			sourceTree = "<group>";
+		};
+		D0E48D9120B2B4E0001E2815 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48D9220B2B4E0001E2815 /* JavaScriptCore.framework */,
+				D0E48D9420B2B4E0001E2815 /* Foundation.framework */,
+				D0E48D9620B2B4E0001E2815 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0E48D9820B2B4E0001E2815 /* ShadowTrackerExtraDylib */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48DBD20B2B4E0001E2815 /* ShadowTrackerExtraDylib.h */,
+				D0E48DBF20B2B4E0001E2815 /* ShadowTrackerExtraDylib.m */,
+				D0E48D9920B2B4E0001E2815 /* Logos */,
+				D0E48D9D20B2B4E0001E2815 /* Config */,
+				D0E48DAE20B2B4E0001E2815 /* Tools */,
+				D0E48DB520B2B4E0001E2815 /* AntiAntiDebug */,
+				D0E48DB820B2B4E0001E2815 /* fishhook */,
+				D0E48DB320B2B4E0001E2815 /* Supporting Files */,
+			);
+			path = ShadowTrackerExtraDylib;
+			sourceTree = "<group>";
+		};
+		D0E48D9920B2B4E0001E2815 /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				D021E85220B40E2300F91ECC /* BBURLProtocol.h */,
+				D021E85120B40E2300F91ECC /* BBURLProtocol.m */,
+				D0E48D9A20B2B4E0001E2815 /* ShadowTrackerExtraDylib.xm */,
+				D0E48D9B20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm */,
+				D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */,
+				D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */,
+			);
+			name = Logos;
+			sourceTree = "<group>";
+		};
+		D0E48D9D20B2B4E0001E2815 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48D9E20B2B4E0001E2815 /* MDConfigManager.h */,
+				D0E48DA020B2B4E0001E2815 /* MDConfigManager.m */,
+				D0E48DA220B2B4E0001E2815 /* MDCycriptManager.h */,
+				D0E48DA420B2B4E0001E2815 /* MDCycriptManager.m */,
+				D0E48DA620B2B4E0001E2815 /* MDMethodTrace.h */,
+				D0E48DA820B2B4E0001E2815 /* MDMethodTrace.m */,
+				D0E48DAA20B2B4E0001E2815 /* ANYMethodLog.h */,
+				D0E48DAC20B2B4E0001E2815 /* ANYMethodLog.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		D0E48DAE20B2B4E0001E2815 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48DAF20B2B4E0001E2815 /* LLDBTools.h */,
+				D0E48DB120B2B4E0001E2815 /* LLDBTools.mm */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		D0E48DB320B2B4E0001E2815 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48DB420B2B4E0001E2815 /* ShadowTrackerExtraDylib-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D0E48DB520B2B4E0001E2815 /* AntiAntiDebug */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48DB620B2B4E0001E2815 /* AntiAntiDebug.m */,
+			);
+			name = AntiAntiDebug;
+			sourceTree = "<group>";
+		};
+		D0E48DB820B2B4E0001E2815 /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				D0E48DB920B2B4E0001E2815 /* fishhook.c */,
+				D0E48DBB20B2B4E0001E2815 /* fishhook.h */,
+			);
+			name = fishhook;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D0E48D8B20B2B4E0001E2815 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0E48DA320B2B4E0001E2815 /* MDCycriptManager.h in Headers */,
+				D0E48DA720B2B4E0001E2815 /* MDMethodTrace.h in Headers */,
+				D0E48DB020B2B4E0001E2815 /* LLDBTools.h in Headers */,
+				D0E48D9F20B2B4E0001E2815 /* MDConfigManager.h in Headers */,
+				D0E48DBE20B2B4E0001E2815 /* ShadowTrackerExtraDylib.h in Headers */,
+				D0E48DAB20B2B4E0001E2815 /* ANYMethodLog.h in Headers */,
+				D098365F20B5534A00283D1D /* XYMetalRenderHelper.h in Headers */,
+				D021E85420B40E2400F91ECC /* BBURLProtocol.h in Headers */,
+				D0E48DBC20B2B4E0001E2815 /* fishhook.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D0E48D7A20B2B4E0001E2815 /* ShadowTrackerExtra */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0E48DC620B2B4E0001E2815 /* Build configuration list for PBXNativeTarget "ShadowTrackerExtra" */;
+			buildPhases = (
+				D0E48D7420B2B4E0001E2815 /* Sources */,
+				D0E48D7520B2B4E0001E2815 /* Frameworks */,
+				D0E48D7620B2B4E0001E2815 /* ShellScript */,
+				D0E48D7720B2B4E0001E2815 /* Resources */,
+				D0E48D7820B2B4E0001E2815 /* CopyFiles */,
+				D0E48D7920B2B4E0001E2815 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0E48D9020B2B4E0001E2815 /* PBXTargetDependency */,
+			);
+			name = ShadowTrackerExtra;
+			productName = ShadowTrackerExtra;
+			productReference = D0E48D7B20B2B4E0001E2815 /* ShadowTrackerExtra.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D0E48D8C20B2B4E0001E2815 /* ShadowTrackerExtraDylib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0E48DC320B2B4E0001E2815 /* Build configuration list for PBXNativeTarget "ShadowTrackerExtraDylib" */;
+			buildPhases = (
+				D0E48D8820B2B4E0001E2815 /* ShellScript */,
+				D0E48D8920B2B4E0001E2815 /* Sources */,
+				D0E48D8A20B2B4E0001E2815 /* Frameworks */,
+				D0E48D8B20B2B4E0001E2815 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShadowTrackerExtraDylib;
+			productName = ShadowTrackerExtraDylib;
+			productReference = D0E48D8D20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0E48D7020B2B4E0001E2815 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = xiaoyuan;
+				TargetAttributes = {
+					D0E48D7A20B2B4E0001E2815 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					D0E48D8C20B2B4E0001E2815 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = D0E48D7320B2B4E0001E2815 /* Build configuration list for PBXProject "ShadowTrackerExtra" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D0E48D6F20B2B4E0001E2815;
+			productRefGroup = D0E48D7C20B2B4E0001E2815 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D0E48D7A20B2B4E0001E2815 /* ShadowTrackerExtra */,
+				D0E48D8C20B2B4E0001E2815 /* ShadowTrackerExtraDylib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0E48D7720B2B4E0001E2815 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0E48D8420B2B4E0001E2815 /* MDConfig.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D0E48D7620B2B4E0001E2815 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = /opt/MonkeyDev/Tools/pack.sh;
+		};
+		D0E48D7920B2B4E0001E2815 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/Tools/pack.sh codesign";
+		};
+		D0E48D8820B2B4E0001E2815 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp-logos";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D0E48D7420B2B4E0001E2815 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0E48D8920B2B4E0001E2815 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D098366020B5534A00283D1D /* XYMetalRenderHelper.m in Sources */,
+				D0E48DA520B2B4E0001E2815 /* MDCycriptManager.m in Sources */,
+				D0E48DAD20B2B4E0001E2815 /* ANYMethodLog.m in Sources */,
+				D0E48DA120B2B4E0001E2815 /* MDConfigManager.m in Sources */,
+				D0E48DB220B2B4E0001E2815 /* LLDBTools.mm in Sources */,
+				D0E48D9C20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm in Sources */,
+				D0E48DC020B2B4E0001E2815 /* ShadowTrackerExtraDylib.m in Sources */,
+				D0E48DA920B2B4E0001E2815 /* MDMethodTrace.m in Sources */,
+				D0E48DBA20B2B4E0001E2815 /* fishhook.c in Sources */,
+				D0E48DB720B2B4E0001E2815 /* AntiAntiDebug.m in Sources */,
+				D021E85320B40E2400F91ECC /* BBURLProtocol.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0E48D9020B2B4E0001E2815 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0E48D8C20B2B4E0001E2815 /* ShadowTrackerExtraDylib */;
+			targetProxy = D0E48D8F20B2B4E0001E2815 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D0E48DC120B2B4E0001E2815 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D0E48DC220B2B4E0001E2815 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D0E48DC420B2B4E0001E2815 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NKW67GFDHM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+					"$(PROJECT_DIR)/ShadowTrackerExtraDylib/FileBrowserLib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ShadowTrackerExtraDylib/ShadowTrackerExtraDylib-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libShadowTrackerExtraDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"ShadowTrackerExtraDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-weak_library",
+					"$(MonkeyDevPath)/Frameworks/libsubstrate.dylib",
+					"-lcycript",
+					"-framework",
+					RevealServer,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		D0E48DC520B2B4E0001E2815 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = NKW67GFDHM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+					"$(PROJECT_DIR)/ShadowTrackerExtraDylib/FileBrowserLib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ShadowTrackerExtraDylib/ShadowTrackerExtraDylib-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libShadowTrackerExtraDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"ShadowTrackerExtraDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-weak_library",
+					"$(MonkeyDevPath)/Frameworks/libsubstrate.dylib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D0E48DC720B2B4E0001E2815 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NKW67GFDHM;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ShadowTrackerExtraDylib/FileBrowserLib",
+				);
+				INFOPLIST_FILE = ShadowTrackerExtra/Info.plist;
+				MONKEYDEV_ADD_SUBSTRATE = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_INSERT_DYLIB = YES;
+				MONKEYDEV_RESTORE_SYMBOL = YES;
+				MONKEYDEV_TARGET_APP = Optional;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = aaa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D0E48DC820B2B4E0001E2815 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NKW67GFDHM;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ShadowTrackerExtraDylib/FileBrowserLib",
+				);
+				INFOPLIST_FILE = ShadowTrackerExtra/Info.plist;
+				MONKEYDEV_ADD_SUBSTRATE = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_INSERT_DYLIB = YES;
+				MONKEYDEV_RESTORE_SYMBOL = YES;
+				MONKEYDEV_TARGET_APP = Optional;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = aaa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D0E48D7320B2B4E0001E2815 /* Build configuration list for PBXProject "ShadowTrackerExtra" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0E48DC120B2B4E0001E2815 /* Debug */,
+				D0E48DC220B2B4E0001E2815 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0E48DC320B2B4E0001E2815 /* Build configuration list for PBXNativeTarget "ShadowTrackerExtraDylib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0E48DC420B2B4E0001E2815 /* Debug */,
+				D0E48DC520B2B4E0001E2815 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0E48DC620B2B4E0001E2815 /* Build configuration list for PBXNativeTarget "ShadowTrackerExtra" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0E48DC720B2B4E0001E2815 /* Debug */,
+				D0E48DC820B2B4E0001E2815 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D0E48D7020B2B4E0001E2815 /* Project object */;
+}
