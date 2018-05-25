@@ -35,7 +35,7 @@
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class MTLDebugRenderCommandEncoder; @class UIApplication; @class MTLToolsRenderCommandEncoder; @class AGXA11FamilyRenderContext; @class MSRqdDeviceUtil; @class AnnoucementNetworkModel; @class MSDKAuthModel; @class MSRqdBundleUtil; @class FIOSView; @class MSDKAuthService; @class MSDKHttpRequest; @class BeaconEventModule; @class BeaconDeviceUtil; @class MTLTelemetryRenderCommandEncoder; @class BeaconBundleUtil; @class MTAAccountEvent; @class MSDKBugly; 
+@class BeaconDeviceUtil; @class MSRqdBundleUtil; @class BeaconEventModule; @class AnnoucementNetworkModel; @class BeaconBundleUtil; @class MTLToolsRenderCommandEncoder; @class MTLTelemetryRenderCommandEncoder; @class UIApplication; @class MSDKBugly; @class MSDKHttpRequest; @class MSRqdDeviceUtil; @class MSDKAuthModel; @class MTAAccountEvent; @class MSDKAuthService; @class AGXA11FamilyRenderContext; @class FIOSView; @class MTLDebugRenderCommandEncoder; 
 
 
 #line 16 "/Users/xiaoyuan/Destop/work/GitHub/ShadowTrackerExtra/ShadowTrackerExtraDylib/Logos/ShadowTrackerExtraDylib.xm"
@@ -637,6 +637,22 @@ static void (*_logos_orig$AGXA11FamilyRenderContext$AGXA11FamilyRenderContext$dr
 
 
 static void _logos_method$AGXA11FamilyRenderContext$AGXA11FamilyRenderContext$drawIndexedPrimitives$indexCount$indexType$indexBuffer$indexBufferOffset$instanceCount$baseVertex$baseInstance$(_LOGOS_SELF_TYPE_NORMAL AGXA11FamilyRenderContext* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, MTLPrimitiveType primitiveType, NSUInteger indexCount, MTLIndexType indexType, id<MTLBuffer> indexBuffer, NSUInteger indexBufferOffset, NSUInteger instanceCount, NSInteger baseVertex, NSUInteger baseInstance) {
+#if DEBUG
+    NSString *classCaller = @"";
+    NSString *functionCaller = @"";
+    NSString *sourceString = [[NSThread callStackSymbols] objectAtIndex:1];
+    NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
+    [array removeObject:@""];
+    [array removeLastObject];
+    if ([array.lastObject isEqualToString:@"_block_invoke"]) {
+        [array removeLastObject];
+    }
+    functionCaller = array.lastObject;
+    if (array.count > 1) {
+        classCaller = [array objectAtIndex:array.count-2];
+    }
+#endif
     
     if(instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
         return;
@@ -690,9 +706,27 @@ void _hookAGXA11FamilyRenderContext(void) {
         clas = objc_getClass("AGXA11FamilyRenderContext");
     } while (clas = NULL);
     {Class _logos_class$AGXA11FamilyRenderContext$AGXA11FamilyRenderContext = objc_getClass("AGXA11FamilyRenderContext"); MSHookMessageEx(_logos_class$AGXA11FamilyRenderContext$AGXA11FamilyRenderContext, @selector(drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:baseVertex:baseInstance:), (IMP)&_logos_method$AGXA11FamilyRenderContext$AGXA11FamilyRenderContext$drawIndexedPrimitives$indexCount$indexType$indexBuffer$indexBufferOffset$instanceCount$baseVertex$baseInstance$, (IMP*)&_logos_orig$AGXA11FamilyRenderContext$AGXA11FamilyRenderContext$drawIndexedPrimitives$indexCount$indexType$indexBuffer$indexBufferOffset$instanceCount$baseVertex$baseInstance$);}
+    
+    unsigned int count;
+    Class cls = objc_getClass("AGXA11Device");
+    NSMutableArray *methodList = @[].mutableCopy;
+    while (cls!=[NSObject class]){
+        Method *methods = class_copyMethodList(cls, &count);
+        for (int i=0; i < count; i++) {
+            NSString *methodName = [NSString stringWithCString:sel_getName(method_getName(methods[i])) encoding:NSUTF8StringEncoding];
+            
+            [methodList addObject:methodName?:@""];
+        }
+        if (methods) {
+            free(methods);
+        }
+        cls = class_getSuperclass(cls);
+    }
+    NSLog(@"AGXA11Device方法名：%@ ", methodList);
 }
 
-static __attribute__((constructor)) void _logosLocalCtor_4dc5e7d5(int __unused argc, char __unused **argv, char __unused **envp) {
+
+static __attribute__((constructor)) void _logosLocalCtor_51d77588(int __unused argc, char __unused **argv, char __unused **envp) {
     _checkDylibs();
     _printEnv();
 

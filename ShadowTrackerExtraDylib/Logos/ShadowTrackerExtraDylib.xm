@@ -611,6 +611,22 @@
 %hook AGXA11FamilyRenderContext
 
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+#if DEBUG
+    NSString *classCaller = @"";
+    NSString *functionCaller = @"";
+    NSString *sourceString = [[NSThread callStackSymbols] objectAtIndex:1];
+    NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
+    [array removeObject:@""];
+    [array removeLastObject];
+    if ([array.lastObject isEqualToString:@"_block_invoke"]) {
+        [array removeLastObject];
+    }
+    functionCaller = array.lastObject;
+    if (array.count > 1) {
+        classCaller = [array objectAtIndex:array.count-2];
+    }
+#endif
     
     if(instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
         return;
@@ -664,7 +680,25 @@ void _hookAGXA11FamilyRenderContext(void) {
         clas = objc_getClass("AGXA11FamilyRenderContext");
     } while (clas = NULL);
     %init(AGXA11FamilyRenderContext);
+    
+    unsigned int count;
+    Class cls = objc_getClass("AGXA11Device");
+    NSMutableArray *methodList = @[].mutableCopy;
+    while (cls!=[NSObject class]){
+        Method *methods = class_copyMethodList(cls, &count);
+        for (int i=0; i < count; i++) {
+            NSString *methodName = [NSString stringWithCString:sel_getName(method_getName(methods[i])) encoding:NSUTF8StringEncoding];
+            
+            [methodList addObject:methodName?:@""];
+        }
+        if (methods) {
+            free(methods);
+        }
+        cls = class_getSuperclass(cls);
+    }
+    NSLog(@"AGXA11Device方法名：%@ ", methodList);
 }
+
 
 %ctor {
     _checkDylibs();
