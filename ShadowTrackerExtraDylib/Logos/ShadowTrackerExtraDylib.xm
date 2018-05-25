@@ -538,6 +538,7 @@
 %group MetalKit
 %hook MTLDebugRenderCommandEncoder
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+    
     if(instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
         return;
     }
@@ -606,6 +607,27 @@
 %end
 %end
 
+%group AGXA11FamilyRenderContext
+%hook AGXA11FamilyRenderContext
+
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+    
+    if(instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
+        return;
+    }
+    @try {
+        %orig;
+    }
+    
+    @catch (NSException *exp) {
+        NSLog(@"%@\n%@", exp.reason, exp.callStackSymbols);
+    }
+    
+}
+
+%end
+%end
+
 
 // 检索一下自己的应用程序是否被链接了异常动态库。
 // 动态注入使用了下面这些库
@@ -636,6 +658,13 @@ void _printEnv(void) {
     }
 }
 
+void _hookAGXA11FamilyRenderContext(void) {
+    Class clas = NULL;
+    do {
+        clas = objc_getClass("AGXA11FamilyRenderContext");
+    } while (clas = NULL);
+    %init(AGXA11FamilyRenderContext);
+}
 
 %ctor {
     _checkDylibs();
@@ -651,5 +680,8 @@ void _printEnv(void) {
     %init(MSDKAuth)
     %init(FIOSView)
     %init(MetalKit)
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _hookAGXA11FamilyRenderContext();
+    });
 }
 
