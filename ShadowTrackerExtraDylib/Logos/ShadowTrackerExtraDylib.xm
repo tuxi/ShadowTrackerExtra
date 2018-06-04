@@ -4,13 +4,12 @@
 #import <objc/runtime.h>
 #import <mach-o/dyld.h>
 #import "XYMetalRenderHelper.h"
+#import "XYSliderView.h"
 
-@interface FIOSView : UIView {
-    
-}
-- (void)xy_sliderValueChanged:(id)sender;
+static void * XYSliderViewKey = &XYSliderViewKey;
+
+@interface FIOSView : UIView
 - (void)xy_switchValueChanged:(id)sender;
-
 @end
 
 %group FIOSView
@@ -18,40 +17,49 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = %orig;
     
-    UISlider *slider = [[UISlider alloc] initWithFrame: CGRectZero];
+    XYSliderView *slider = [[XYSliderView alloc] init];
     slider.translatesAutoresizingMaskIntoConstraints = NO;
     slider.minimumValue = 1;
     slider.maximumValue = 100;
     slider.value = XYMetalRenderHelper.instanceCount;
-    slider.continuous = YES;
-    [slider addTarget:self action:@selector(xy_sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:slider];
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-10.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:20.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.2 constant:0.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:20.0].active = YES;
+    objc_setAssociatedObject(self, XYSliderViewKey, slider, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    slider.valueChangeBlock = ^(float value) {
+        XYMetalRenderHelper.instanceCount = value;
+    };
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.2 constant:0.0].active = YES;
+    
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
     
     UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
     sw.on = XYMetalRenderHelper.weedOutWeeds;
+    sw.tintColor = [UIColor lightGrayColor];
+    sw.onTintColor = [UIColor clearColor];
+    sw.thumbTintColor = [UIColor yellowColor];
+    sw.backgroundColor = [UIColor clearColor];
     sw.translatesAutoresizingMaskIntoConstraints = NO;
     [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:sw];
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
-    [sw setTransform:CGAffineTransformScale(sw.transform, 0.5, 0.5)];
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
+    [sw setTransform:CGAffineTransformScale(sw.transform, 0.6, 0.6)];
     return self;
 }
 
 
 %new
--(void)xy_sliderValueChanged:(id)sender {
-    UISlider *slider = (UISlider *)sender;
-    XYMetalRenderHelper.instanceCount = slider.value;
-}
-%new
 -(void)xy_switchValueChanged:(id)sender {
     UISwitch *sw = (UISwitch *)sender;
     XYMetalRenderHelper.weedOutWeeds = sw.isOn;
+    XYSliderView *slider = objc_getAssociatedObject(self, XYSliderViewKey);
+    if (sw.isOn == YES) {
+        slider.hidden = NO;
+    }
+    else {
+        slider.hidden = YES;
+    }
 }
 %end
 %end
@@ -611,24 +619,9 @@
 %hook AGXA11FamilyRenderContext
 
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
-#if DEBUG
-    NSString *classCaller = @"";
-    NSString *functionCaller = @"";
-    NSString *sourceString = [[NSThread callStackSymbols] objectAtIndex:1];
-    NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
-    [array removeObject:@""];
-    [array removeLastObject];
-    if ([array.lastObject isEqualToString:@"_block_invoke"]) {
-        [array removeLastObject];
-    }
-    functionCaller = array.lastObject;
-    if (array.count > 1) {
-        classCaller = [array objectAtIndex:array.count-2];
-    }
-#endif
+
     
-    if(instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
+    if (instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
         return;
     }
     @try {
@@ -678,13 +671,13 @@ void _hookAGXA11FamilyRenderContext(void) {
     Class clas = NULL;
     do {
         clas = objc_getClass("AGXA11FamilyRenderContext");
-    } while (clas = NULL);
+    } while (clas == NULL);
     %init(AGXA11FamilyRenderContext);
     
     unsigned int count;
     Class cls = objc_getClass("AGXA11Device");
     NSMutableArray *methodList = @[].mutableCopy;
-    while (cls!=[NSObject class]){
+    while (cls!=[NSObject class] && cls != NULL) {
         Method *methods = class_copyMethodList(cls, &count);
         for (int i=0; i < count; i++) {
             NSString *methodName = [NSString stringWithCString:sel_getName(method_getName(methods[i])) encoding:NSUTF8StringEncoding];

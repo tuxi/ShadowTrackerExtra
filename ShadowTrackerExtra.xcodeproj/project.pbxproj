@@ -11,6 +11,8 @@
 		D021E85420B40E2400F91ECC /* BBURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = D021E85220B40E2300F91ECC /* BBURLProtocol.h */; };
 		D098365F20B5534A00283D1D /* XYMetalRenderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */; };
 		D098366020B5534A00283D1D /* XYMetalRenderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */; };
+		D0BB447620C4DF0000F0F36E /* XYSliderView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BB447420C4DEFF00F0F36E /* XYSliderView.h */; };
+		D0BB447720C4DF0000F0F36E /* XYSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BB447520C4DF0000F0F36E /* XYSliderView.m */; };
 		D0E48D8420B2B4E0001E2815 /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0E48D8320B2B4E0001E2815 /* MDConfig.plist */; };
 		D0E48D8E20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0E48D8D20B2B4E0001E2815 /* libShadowTrackerExtraDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D0E48D9320B2B4E0001E2815 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E48D9220B2B4E0001E2815 /* JavaScriptCore.framework */; };
@@ -62,6 +64,8 @@
 		D021E85220B40E2300F91ECC /* BBURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBURLProtocol.h; sourceTree = "<group>"; };
 		D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYMetalRenderHelper.h; sourceTree = "<group>"; };
 		D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYMetalRenderHelper.m; sourceTree = "<group>"; };
+		D0BB447420C4DEFF00F0F36E /* XYSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSliderView.h; sourceTree = "<group>"; };
+		D0BB447520C4DF0000F0F36E /* XYSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSliderView.m; sourceTree = "<group>"; };
 		D0E48D7B20B2B4E0001E2815 /* ShadowTrackerExtra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShadowTrackerExtra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E48D7E20B2B4E0001E2815 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		D0E48D7F20B2B4E0001E2815 /* Target.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Target.plist; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 			children = (
 				D021E85220B40E2300F91ECC /* BBURLProtocol.h */,
 				D021E85120B40E2300F91ECC /* BBURLProtocol.m */,
+				D0BB447420C4DEFF00F0F36E /* XYSliderView.h */,
+				D0BB447520C4DF0000F0F36E /* XYSliderView.m */,
 				D0E48D9A20B2B4E0001E2815 /* ShadowTrackerExtraDylib.xm */,
 				D0E48D9B20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm */,
 				D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */,
@@ -267,6 +273,7 @@
 				D0E48DA320B2B4E0001E2815 /* MDCycriptManager.h in Headers */,
 				D0E48DA720B2B4E0001E2815 /* MDMethodTrace.h in Headers */,
 				D0E48DB020B2B4E0001E2815 /* LLDBTools.h in Headers */,
+				D0BB447620C4DF0000F0F36E /* XYSliderView.h in Headers */,
 				D0E48D9F20B2B4E0001E2815 /* MDConfigManager.h in Headers */,
 				D0E48DBE20B2B4E0001E2815 /* ShadowTrackerExtraDylib.h in Headers */,
 				D0E48DAB20B2B4E0001E2815 /* ANYMethodLog.h in Headers */,
@@ -426,6 +433,7 @@
 				D0E48D9C20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm in Sources */,
 				D0E48DC020B2B4E0001E2815 /* ShadowTrackerExtraDylib.m in Sources */,
 				D0E48DA920B2B4E0001E2815 /* MDMethodTrace.m in Sources */,
+				D0BB447720C4DF0000F0F36E /* XYSliderView.m in Sources */,
 				D0E48DBA20B2B4E0001E2815 /* fishhook.c in Sources */,
 				D0E48DB720B2B4E0001E2815 /* AntiAntiDebug.m in Sources */,
 				D021E85320B40E2400F91ECC /* BBURLProtocol.m in Sources */,
