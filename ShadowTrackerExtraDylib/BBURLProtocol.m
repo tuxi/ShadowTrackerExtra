@@ -13,7 +13,7 @@
 #import "UIImage+WebP.h"
 #endif
 
-static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
+static NSString* const BBProtocolKey = @"BBURLProtocol";
 
 
 @interface BBURLProtocol ()<NSURLConnectionDataDelegate>
@@ -30,10 +30,6 @@ static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
     
-    
-#ifdef DEBUG
-    NSLog(@"######NHWEBURLProtocol canInitRequest \nurl:%@ \n\n\n\n",request.URL.absoluteString);
-#endif
     if ([request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"]) {
         if ([NSURLProtocol propertyForKey:BBProtocolKey inRequest:request] == nil) {
             return YES;
@@ -50,9 +46,6 @@ static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
 
 - (void)stopLoading
 {
-#ifdef DEBUG
-    NSLog(@"######NHWEBURLProtocol stopLoading");
-#endif
     
     if (self.connection) {
         [self.connection cancel];
@@ -63,10 +56,6 @@ static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
 - (void)startLoading {
     NSMutableURLRequest *newRequest = [self cloneRequest:self.request];
     NSString *urlString = newRequest.URL.absoluteString;
-    
-#ifdef DEBUG
-    NSLog(@"######NHWEBURLProtocol startLoading url:%@",urlString);
-#endif
     [NSURLProtocol setProperty:@YES forKey:BBProtocolKey inRequest:newRequest];
     
     [self sendRequest:newRequest];
@@ -101,12 +90,9 @@ static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
 
 
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//--------------------------------------------------------网络请求--------------------------------------------------------//
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+#pragma mark - 网络请求
+////////////////////////////////////////////////////////////////////////
 
 - (void)sendRequest:(NSURLRequest *)request {
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -140,12 +126,7 @@ static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
 
 - (nullable NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(nullable NSURLResponse *)response
 {
-    /**
-     * 重定向
-     */
-#ifdef DEBUG
-    NSLog(@"^^^^^^^^重定向BBURLProtocol \nrequest:%@ \n\nresponse:%@\n\n",request, response);
-#endif
+    // 请求重定向
     if (response) {
         [self.client URLProtocol:self wasRedirectedToRequest:request redirectResponse:response];
     }
@@ -155,10 +136,7 @@ static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    /**
-     * 加载完毕
-     */
-    
+    // 加载完毕
     NSData *data = self.recData;
     NSError *error = nil;
     @try {
@@ -175,9 +153,7 @@ static NSString* const BBProtocolKey = @"BBURLProtocol-already-handled";
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    /**
-     * 加载失败
-     */
+    // 加载失败
     [self.client URLProtocol:self didFailWithError:error];
 }
 

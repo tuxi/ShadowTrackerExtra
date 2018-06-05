@@ -12,15 +12,19 @@
 
 @implementation XYMetalRenderHelper
 
-static NSUInteger _instanceCount = 100;
 static BOOL _weedOutWeeds = YES;
 
-+ (NSUInteger)instanceCount {
-    return _instanceCount;
++ (void)setInstanceCount:(NSUInteger)instanceCount {
+    [[NSUserDefaults standardUserDefaults] setInteger:instanceCount forKey:NSStringFromSelector(@selector(instanceCount))];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)setInstanceCount:(NSUInteger)instanceCount {
-    _instanceCount = instanceCount;
++ (NSUInteger)instanceCount {
+     NSNumber *n = [[NSUserDefaults standardUserDefaults] objectForKey:NSStringFromSelector(@selector(instanceCount))];
+    if (n == nil) {
+        return 1;
+    }
+    return n.integerValue;
 }
 
 + (BOOL)weedOutWeeds {

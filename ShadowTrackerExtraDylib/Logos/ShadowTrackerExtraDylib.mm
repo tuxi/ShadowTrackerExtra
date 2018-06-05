@@ -34,7 +34,7 @@ static void * XYSliderViewKey = &XYSliderViewKey;
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class MSRqdBundleUtil; @class BeaconBundleUtil; @class UIApplication; @class AGXA11FamilyRenderContext; @class MTLDebugRenderCommandEncoder; @class MSDKHttpRequest; @class MTAAccountEvent; @class MTLTelemetryRenderCommandEncoder; @class MTLToolsRenderCommandEncoder; @class MSDKBugly; @class BeaconDeviceUtil; @class MSDKAuthService; @class FIOSView; @class BeaconEventModule; @class MSRqdDeviceUtil; @class AnnoucementNetworkModel; @class MSDKAuthModel; 
+@class MSDKAuthService; @class FIOSView; @class UIApplication; @class BeaconDeviceUtil; @class MSRqdBundleUtil; @class MSDKBugly; @class MTAAccountEvent; @class MSDKAuthModel; @class BeaconEventModule; @class MTLTelemetryRenderCommandEncoder; @class AGXA11FamilyRenderContext; @class AnnoucementNetworkModel; @class BeaconBundleUtil; @class MSRqdDeviceUtil; @class MSDKHttpRequest; @class MTLToolsRenderCommandEncoder; @class MTLDebugRenderCommandEncoder; 
 
 
 #line 15 "/Users/xiaoyuan/Destop/work/GitHub/ShadowTrackerExtra/ShadowTrackerExtraDylib/Logos/ShadowTrackerExtraDylib.xm"
@@ -67,7 +67,7 @@ static FIOSView* _logos_method$FIOSView$FIOSView$initWithFrame$(_LOGOS_SELF_TYPE
     sw.translatesAutoresizingMaskIntoConstraints = NO;
     [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:sw];
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-8.0].active = YES;
     [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0].active = YES;
     [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
     [sw setTransform:CGAffineTransformScale(sw.transform, 0.6, 0.6)];

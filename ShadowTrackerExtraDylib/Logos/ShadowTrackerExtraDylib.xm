@@ -41,10 +41,10 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     sw.translatesAutoresizingMaskIntoConstraints = NO;
     [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:sw];
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-8.0].active = YES;
     [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0].active = YES;
     [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
-    [sw setTransform:CGAffineTransformScale(sw.transform, 0.6, 0.6)];
+    [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];
     return self;
 }
 
