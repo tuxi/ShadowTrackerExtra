@@ -6,65 +6,6 @@
 #import "XYMetalRenderHelper.h"
 #import "XYSliderView.h"
 
-static void * XYSliderViewKey = &XYSliderViewKey;
-
-@interface FIOSView : UIView
-- (void)xy_switchValueChanged:(id)sender;
-@end
-
-%group FIOSView
-%hook FIOSView
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = %orig;
-    
-    XYSliderView *slider = [[XYSliderView alloc] init];
-    slider.translatesAutoresizingMaskIntoConstraints = NO;
-    slider.minimumValue = 1;
-    slider.maximumValue = 100;
-    slider.value = XYMetalRenderHelper.instanceCount;
-    [self addSubview:slider];
-    objc_setAssociatedObject(self, XYSliderViewKey, slider, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    slider.valueChangeBlock = ^(float value) {
-        XYMetalRenderHelper.instanceCount = value;
-    };
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.2 constant:0.0].active = YES;
-    
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
-    
-    UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
-    sw.on = XYMetalRenderHelper.weedOutWeeds;
-    sw.tintColor = [UIColor lightGrayColor];
-    sw.onTintColor = [UIColor clearColor];
-    sw.thumbTintColor = [UIColor yellowColor];
-    sw.backgroundColor = [UIColor clearColor];
-    sw.translatesAutoresizingMaskIntoConstraints = NO;
-    [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self addSubview:sw];
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-8.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
-    [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];
-    return self;
-}
-
-
-%new
--(void)xy_switchValueChanged:(id)sender {
-    UISwitch *sw = (UISwitch *)sender;
-    XYMetalRenderHelper.weedOutWeeds = sw.isOn;
-    XYSliderView *slider = objc_getAssociatedObject(self, XYSliderViewKey);
-    if (sw.isOn == YES) {
-        slider.hidden = NO;
-    }
-    else {
-        slider.hidden = YES;
-    }
-}
-%end
-%end
-
-
 %group MSRqdDevice
 %hook MSRqdDeviceUtil
 
@@ -634,6 +575,88 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     
 }
 
+%end
+%end
+
+static void * XYSliderViewKey = &XYSliderViewKey;
+
+@interface FIOSView : UIView
+- (void)xy_switchValueChanged:(id)sender;
+- (UIImpactFeedbackGenerator *)feedbackGenerator;
+@end
+
+%group FIOSView
+%hook FIOSView
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = %orig;
+    
+    XYSliderView *slider = [[XYSliderView alloc] init];
+    slider.translatesAutoresizingMaskIntoConstraints = NO;
+    slider.minimumValue = 1;
+    slider.maximumValue = 100;
+    slider.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.28];
+    slider.layer.cornerRadius = 3.0;
+    slider.layer.masksToBounds = YES;
+    slider.value = XYMetalRenderHelper.instanceCount;
+    [self addSubview:slider];
+    objc_setAssociatedObject(self, XYSliderViewKey, slider, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    __weak typeof(self) weakSelf = self;
+    slider.valueChangeBlock = ^(float value) {
+        XYMetalRenderHelper.instanceCount = value;
+        // 触发taptic反馈
+#ifdef __IPHONE_10_0
+        if (value == slider.minimumValue || value == slider.maximumValue) {
+            return;
+        }
+        [weakSelf.feedbackGenerator impactOccurred];
+#endif
+    };
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.3 constant:0.0].active = YES;
+    
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
+    
+    UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
+    sw.on = XYMetalRenderHelper.weedOutWeeds;
+    sw.tintColor = [UIColor lightGrayColor];
+    sw.onTintColor = [UIColor clearColor];
+    sw.thumbTintColor = [UIColor yellowColor];
+    sw.backgroundColor = [UIColor clearColor];
+    sw.translatesAutoresizingMaskIntoConstraints = NO;
+    [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self addSubview:sw];
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-5.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeBottom multiplier:1.0 constant:10.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
+    [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];
+    return self;
+}
+
+#ifdef __IPHONE_10_0
+%new
+- (UIImpactFeedbackGenerator *)feedbackGenerator {
+    UIImpactFeedbackGenerator *feedbackGenerator = objc_getAssociatedObject(self, _cmd);
+    if (feedbackGenerator == nil) {
+        feedbackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
+        objc_setAssociatedObject(self, _cmd, feedbackGenerator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return feedbackGenerator;
+}
+#endif
+
+
+%new
+-(void)xy_switchValueChanged:(id)sender {
+    UISwitch *sw = (UISwitch *)sender;
+    XYMetalRenderHelper.weedOutWeeds = sw.isOn;
+    XYSliderView *slider = objc_getAssociatedObject(self, XYSliderViewKey);
+    if (sw.isOn == YES) {
+        slider.hidden = NO;
+    }
+    else {
+        slider.hidden = YES;
+    }
+}
 %end
 %end
 

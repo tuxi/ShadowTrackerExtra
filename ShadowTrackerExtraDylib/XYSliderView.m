@@ -47,7 +47,7 @@
     [NSLayoutConstraint constraintWithItem:self.addButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0].active = YES;
     [NSLayoutConstraint constraintWithItem:self.addButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
     [NSLayoutConstraint constraintWithItem:self.addButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:self.addButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.addButton attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:self.addButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.addButton attribute:NSLayoutAttributeWidth multiplier:1.0 constant:20.0].active = YES;
     
     [NSLayoutConstraint constraintWithItem:self.subButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0].active = YES;
     [NSLayoutConstraint constraintWithItem:self.subButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0].active = YES;
@@ -173,6 +173,8 @@
         [_addButton setTitle:@"＋" forState:UIControlStateNormal];
         [_addButton setTitleColor:[UIColor colorWithWhite:0.8 alpha:0.7] forState:UIControlStateNormal];
         _addButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _addButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+        _addButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }
     return _addButton;
 }
@@ -185,6 +187,8 @@
         [_subButton setTitle:@"－" forState:UIControlStateNormal];
         [_subButton setTitleColor:[UIColor colorWithWhite:0.8 alpha:0.7] forState:UIControlStateNormal];
         _subButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _subButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+        _subButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }
     return _subButton;
 }
