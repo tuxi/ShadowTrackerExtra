@@ -615,6 +615,7 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     
     [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30.0].active = YES;
     [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:50].active = YES;
     
     UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
     sw.on = XYMetalRenderHelper.weedOutWeeds;
@@ -625,8 +626,8 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     sw.translatesAutoresizingMaskIntoConstraints = NO;
     [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:sw];
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-5.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeBottom multiplier:1.0 constant:10.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-3.0].active = YES;
+    
     [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
     [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];
     return self;
