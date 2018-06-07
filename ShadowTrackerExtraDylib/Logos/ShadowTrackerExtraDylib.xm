@@ -6,6 +6,9 @@
 #import "XYMetalRenderHelper.h"
 #import "XYSliderView.h"
 
+extern void _log_classMethods(Class clas);
+extern void _hookAGXFamilyRenderContext(Class clas);
+
 %group MSRqdDevice
 %hook MSRqdDeviceUtil
 
@@ -482,6 +485,18 @@
     %orig;
 }
 %end
+
+%hook IOSAppDelegate
+- (_Bool)AreHeadphonesPluggedIn {
+    BOOL res = %orig;
+    return res;
+}
+
+- (void)ToggleSuspend:(_Bool)arg1 { // app激活或者进入前台时调用，启动或者暂停游戏
+    %orig;
+}
+
+%end
 %end
 
 %group MetalKit
@@ -554,13 +569,101 @@
     
 }
 %end
+
+%hook MTLToolsObject
+- (id)baseObjectWithClass:(Class)arg1 {
+    id obj = %orig;
+    return obj;
+}
+
+- (id)initWithBaseObject:(id)baseObject parent:(id)parent lockingPolicy:(struct ILayerLockingPolicy *)arg3 {
+    // 获取当前设备的baseObject AGXFamilyRenderContext
+    if (baseObject) {
+        NSString *className = NSStringFromClass([baseObject class]);
+        if ([className hasSuffix:@"FamilyRenderContext"] && [className hasPrefix:@"AGX"]) {
+            _hookAGXFamilyRenderContext([baseObject class]);
+        }
+    }
+    id obj = %orig;
+    return obj;
+}
+- (id)initWithBaseObject:(id)arg1 strongParent:(id)arg2 {
+    id obj = %orig;
+    return obj;
+}
+- (id)initWithBaseObject:(id)arg1 parent:(id)arg2 {
+    id obj = %orig;
+    return obj;
+}
+
+- (void)setOriginalObject:(id)arg1 {
+    %orig;
+}
+- (id)originalObject {
+    id obj = %orig;
+    return obj;
+}
+
 %end
 
-%group AGXA11FamilyRenderContext
+
+%hook FMTLHeap
+- (id)newBufferWithLength:(unsigned long long)arg1 options:(unsigned long long)arg2 {
+    id obj = %orig;
+    return obj;
+}
+- (unsigned long long)maxAvailableSizeWithAlignment:(unsigned long long)arg1 {
+    unsigned long long max = %orig;
+    return max;
+}
+%end
+%end
+
+%group AGX
 %hook AGXA11FamilyRenderContext
 
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
 
+    
+    if (instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
+        return;
+    }
+    @try {
+        %orig;
+    }
+    
+    @catch (NSException *exp) {
+        NSLog(@"%@\n%@", exp.reason, exp.callStackSymbols);
+    }
+    
+}
+
+%end
+
+%hook AGXA10FamilyRenderContext
+
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+    
+    
+    if (instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
+        return;
+    }
+    @try {
+        %orig;
+    }
+    
+    @catch (NSException *exp) {
+        NSLog(@"%@\n%@", exp.reason, exp.callStackSymbols);
+    }
+    
+}
+
+%end
+
+%hook AGXA9FamilyRenderContext
+
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance {
+    
     
     if (instanceCount > XYMetalRenderHelper.instanceCount && XYMetalRenderHelper.weedOutWeeds) {
         return;
@@ -633,6 +736,14 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     return self;
 }
 
+//#if HAS_METAL
+//// Return a drawable object (ie a back buffer texture) for the RHI to render to
+- (id<CAMetalDrawable>)MakeDrawable {
+    id drawble = %orig;
+    return drawble;
+}
+//#endif
+
 #ifdef __IPHONE_10_0
 %new
 - (UIImpactFeedbackGenerator *)feedbackGenerator {
@@ -691,15 +802,29 @@ void _printEnv(void) {
     }
 }
 
-void _hookAGXA11FamilyRenderContext(void) {
-    Class clas = NULL;
-    do {
-        clas = objc_getClass("AGXA11FamilyRenderContext");
-    } while (clas == NULL);
-    %init(AGXA11FamilyRenderContext);
+
+
+void _hookAGXFamilyRenderContext(Class clas) {
+//    Class clas = NULL;
+//    do {
+//        clas = objc_getClass("AGXA11FamilyRenderContext");
+//    } while (clas == NULL);
     
+    static BOOL isFinished = NO;
+    if (clas == NULL || isFinished == YES) {
+        return;
+    }
+    isFinished = YES;
+    %init(AGX);
+    
+    _log_classMethods(NSClassFromString(@"AGXA11Device"));
+    _log_classMethods(clas);
+}
+void _log_classMethods(Class cls) {
+    if (cls == NULL) {
+        return;
+    }
     unsigned int count;
-    Class cls = objc_getClass("AGXA11Device");
     NSMutableArray *methodList = @[].mutableCopy;
     while (cls!=[NSObject class] && cls != NULL) {
         Method *methods = class_copyMethodList(cls, &count);
@@ -713,7 +838,7 @@ void _hookAGXA11FamilyRenderContext(void) {
         }
         cls = class_getSuperclass(cls);
     }
-    NSLog(@"AGXA11Device方法名：%@ ", methodList);
+    NSLog(@"%@方法名：%@ ",NSStringFromClass(cls), methodList);
 }
 
 
@@ -731,8 +856,5 @@ void _hookAGXA11FamilyRenderContext(void) {
     %init(MSDKAuth)
     %init(FIOSView)
     %init(MetalKit)
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _hookAGXA11FamilyRenderContext();
-    });
 }
 
