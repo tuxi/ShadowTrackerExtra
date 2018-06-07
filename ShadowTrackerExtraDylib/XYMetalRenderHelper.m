@@ -12,7 +12,7 @@
 
 @implementation XYMetalRenderHelper
 
-static BOOL _weedOutWeeds = YES;
+static BOOL _weedOutWeeds = NO;
 
 + (void)setInstanceCount:(NSUInteger)instanceCount {
     [[NSUserDefaults standardUserDefaults] setInteger:instanceCount forKey:NSStringFromSelector(@selector(instanceCount))];

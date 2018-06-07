@@ -570,6 +570,21 @@ extern void _hookAGXFamilyRenderContext(Class clas);
 }
 %end
 
+%hook _MTLCommandEncoder // AGXA11FamilyRenderContext基类是_MTLCommandEncoder
+
+- (id)initWithCommandBuffer:(id)arg {
+    id obj = %orig;
+    // 获取当前设备的baseObject AGXFamilyRenderContext
+    if (obj) {
+        NSString *className = NSStringFromClass([obj class]);
+        if ([className hasSuffix:@"FamilyRenderContext"] && [className hasPrefix:@"AGX"]) {
+            _hookAGXFamilyRenderContext([obj class]);
+        }
+    }
+    return obj;
+}
+%end
+
 %hook MTLToolsObject
 - (id)baseObjectWithClass:(Class)arg1 {
     id obj = %orig;
@@ -577,14 +592,14 @@ extern void _hookAGXFamilyRenderContext(Class clas);
 }
 
 - (id)initWithBaseObject:(id)baseObject parent:(id)parent lockingPolicy:(struct ILayerLockingPolicy *)arg3 {
-    // 获取当前设备的baseObject AGXFamilyRenderContext
-    if (baseObject) {
-        NSString *className = NSStringFromClass([baseObject class]);
-        if ([className hasSuffix:@"FamilyRenderContext"] && [className hasPrefix:@"AGX"]) {
-            _hookAGXFamilyRenderContext([baseObject class]);
-        }
-    }
     id obj = %orig;
+    // 获取当前设备的baseObject AGXFamilyRenderContext
+//    if (baseObject) {
+//        NSString *className = NSStringFromClass([baseObject class]);
+//        if ([className hasSuffix:@"FamilyRenderContext"] && [className hasPrefix:@"AGX"]) {
+//            _hookAGXFamilyRenderContext([baseObject class]);
+//        }
+//    }
     return obj;
 }
 - (id)initWithBaseObject:(id)arg1 strongParent:(id)arg2 {
@@ -717,8 +732,8 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.3 constant:0.0].active = YES;
     
     [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:50].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-80.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:-10.0].active = YES;
     
     UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
     sw.on = XYMetalRenderHelper.weedOutWeeds;
@@ -729,7 +744,7 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     sw.translatesAutoresizingMaskIntoConstraints = NO;
     [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:sw];
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:slider attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-3.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:3.0].active = YES;
     
     [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
     [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];

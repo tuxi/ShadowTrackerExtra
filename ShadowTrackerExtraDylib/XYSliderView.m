@@ -171,7 +171,7 @@
         _addButton.translatesAutoresizingMaskIntoConstraints = NO;
         _addButton.tag = 1001;
         [_addButton setTitle:@"＋" forState:UIControlStateNormal];
-        [_addButton setTitleColor:[UIColor colorWithWhite:0.8 alpha:0.7] forState:UIControlStateNormal];
+        [_addButton setTitleColor:[[UIColor yellowColor] colorWithAlphaComponent:0.7] forState:UIControlStateNormal];
         _addButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _addButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
         _addButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -185,7 +185,7 @@
         _subButton.translatesAutoresizingMaskIntoConstraints = NO;
         _subButton.tag = 1002;
         [_subButton setTitle:@"－" forState:UIControlStateNormal];
-        [_subButton setTitleColor:[UIColor colorWithWhite:0.8 alpha:0.7] forState:UIControlStateNormal];
+        [_subButton setTitleColor:[[UIColor yellowColor] colorWithAlphaComponent:0.7] forState:UIControlStateNormal];
         _subButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _subButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
         _subButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -200,9 +200,18 @@
         _valueLabel.adjustsFontSizeToFitWidth = YES;
         _valueLabel.backgroundColor = [UIColor clearColor];
         _valueLabel.text = @(self.value).stringValue;
-        _valueLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.7];
+        _valueLabel.textColor = [[UIColor orangeColor] colorWithAlphaComponent:0.7];
         _valueLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _valueLabel;
 }
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *touchView = [super hitTest:point withEvent:event];
+    if ([touchView isKindOfClass:[UIControl class]]) {
+        return touchView;
+    }
+    return nil;
+}
+
 @end
