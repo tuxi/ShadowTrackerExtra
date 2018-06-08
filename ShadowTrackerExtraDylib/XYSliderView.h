@@ -6,9 +6,9 @@
 //  Copyright © 2018年 xiaoyuan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XYSuspensionMenu.h"
 
-@interface XYSliderView : UIView
+@interface XYSliderView : SuspensionView
 
 @property(nonatomic) float value;                                 // default 0.0. this value will be pinned to min/max
 @property(nonatomic) float minimumValue;                          // default 0.0. the current value may change if outside new min value

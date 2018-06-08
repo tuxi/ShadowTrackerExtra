@@ -737,6 +737,9 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     
     UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
     sw.on = XYMetalRenderHelper.weedOutWeeds;
+    if (XYMetalRenderHelper.weedOutWeeds == NO) {
+        slider.hidden = YES;
+    }
     sw.tintColor = [UIColor lightGrayColor];
     sw.onTintColor = [UIColor clearColor];
     sw.thumbTintColor = [UIColor yellowColor];

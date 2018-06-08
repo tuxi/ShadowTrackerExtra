@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		D021E85320B40E2400F91ECC /* BBURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = D021E85120B40E2300F91ECC /* BBURLProtocol.m */; };
 		D021E85420B40E2400F91ECC /* BBURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = D021E85220B40E2300F91ECC /* BBURLProtocol.h */; };
+		D06F6C9120CA291A00209DA6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D06F6C9020CA291A00209DA6 /* README.md */; };
 		D098365F20B5534A00283D1D /* XYMetalRenderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */; };
 		D098366020B5534A00283D1D /* XYMetalRenderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */; };
+		D0AF47F620CA67B40095FFE2 /* XYSuspensionMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = D0AF47F420CA67B30095FFE2 /* XYSuspensionMenu.h */; };
+		D0AF47F720CA67B40095FFE2 /* XYSuspensionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AF47F520CA67B40095FFE2 /* XYSuspensionMenu.m */; };
 		D0BB447620C4DF0000F0F36E /* XYSliderView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BB447420C4DEFF00F0F36E /* XYSliderView.h */; };
 		D0BB447720C4DF0000F0F36E /* XYSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BB447520C4DF0000F0F36E /* XYSliderView.m */; };
 		D0E48D8420B2B4E0001E2815 /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0E48D8320B2B4E0001E2815 /* MDConfig.plist */; };
@@ -62,8 +65,11 @@
 /* Begin PBXFileReference section */
 		D021E85120B40E2300F91ECC /* BBURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBURLProtocol.m; sourceTree = "<group>"; };
 		D021E85220B40E2300F91ECC /* BBURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBURLProtocol.h; sourceTree = "<group>"; };
+		D06F6C9020CA291A00209DA6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYMetalRenderHelper.h; sourceTree = "<group>"; };
 		D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYMetalRenderHelper.m; sourceTree = "<group>"; };
+		D0AF47F420CA67B30095FFE2 /* XYSuspensionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSuspensionMenu.h; sourceTree = "<group>"; };
+		D0AF47F520CA67B40095FFE2 /* XYSuspensionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSuspensionMenu.m; sourceTree = "<group>"; };
 		D0BB447420C4DEFF00F0F36E /* XYSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSliderView.h; sourceTree = "<group>"; };
 		D0BB447520C4DF0000F0F36E /* XYSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSliderView.m; sourceTree = "<group>"; };
 		D0E48D7B20B2B4E0001E2815 /* ShadowTrackerExtra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShadowTrackerExtra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +146,7 @@
 		D0E48D7D20B2B4E0001E2815 /* ShadowTrackerExtra */ = {
 			isa = PBXGroup;
 			children = (
+				D06F6C9020CA291A00209DA6 /* README.md */,
 				D0E48D7E20B2B4E0001E2815 /* icon.png */,
 				D0E48D7F20B2B4E0001E2815 /* Target.plist */,
 				D0E48D8720B2B4E0001E2815 /* Info.plist */,
@@ -202,6 +209,8 @@
 		D0E48D9920B2B4E0001E2815 /* Logos */ = {
 			isa = PBXGroup;
 			children = (
+				D0AF47F420CA67B30095FFE2 /* XYSuspensionMenu.h */,
+				D0AF47F520CA67B40095FFE2 /* XYSuspensionMenu.m */,
 				D021E85220B40E2300F91ECC /* BBURLProtocol.h */,
 				D021E85120B40E2300F91ECC /* BBURLProtocol.m */,
 				D0BB447420C4DEFF00F0F36E /* XYSliderView.h */,
@@ -276,6 +285,7 @@
 				D0BB447620C4DF0000F0F36E /* XYSliderView.h in Headers */,
 				D0E48D9F20B2B4E0001E2815 /* MDConfigManager.h in Headers */,
 				D0E48DBE20B2B4E0001E2815 /* ShadowTrackerExtraDylib.h in Headers */,
+				D0AF47F620CA67B40095FFE2 /* XYSuspensionMenu.h in Headers */,
 				D0E48DAB20B2B4E0001E2815 /* ANYMethodLog.h in Headers */,
 				D098365F20B5534A00283D1D /* XYMetalRenderHelper.h in Headers */,
 				D021E85420B40E2400F91ECC /* BBURLProtocol.h in Headers */,
@@ -365,6 +375,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D06F6C9120CA291A00209DA6 /* README.md in Resources */,
 				D0E48D8420B2B4E0001E2815 /* MDConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +443,7 @@
 				D0E48DB220B2B4E0001E2815 /* LLDBTools.mm in Sources */,
 				D0E48D9C20B2B4E0001E2815 /* ShadowTrackerExtraDylib.mm in Sources */,
 				D0E48DC020B2B4E0001E2815 /* ShadowTrackerExtraDylib.m in Sources */,
+				D0AF47F720CA67B40095FFE2 /* XYSuspensionMenu.m in Sources */,
 				D0E48DA920B2B4E0001E2815 /* MDMethodTrace.m in Sources */,
 				D0BB447720C4DF0000F0F36E /* XYSliderView.m in Sources */,
 				D0E48DBA20B2B4E0001E2815 /* fishhook.c in Sources */,

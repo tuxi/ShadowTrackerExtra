@@ -38,6 +38,8 @@
         
         [self hiddenValueLabel];
         self.continuous = YES;
+        self.leanEdgeInsets = UIEdgeInsetsZero;
+        self.autoLeanEdge = NO;
     }
     return self;
 }
@@ -206,12 +208,5 @@
     return _valueLabel;
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *touchView = [super hitTest:point withEvent:event];
-    if ([touchView isKindOfClass:[UIControl class]]) {
-        return touchView;
-    }
-    return nil;
-}
 
 @end
