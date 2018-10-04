@@ -733,7 +733,7 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     
     [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30.0].active = YES;
     [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-80.0].active = YES;
-    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:-10.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:slider attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0].active = YES;
     
     UISwitch *sw = [[UISwitch alloc] initWithFrame: CGRectZero];
     sw.on = XYMetalRenderHelper.weedOutWeeds;
@@ -742,14 +742,18 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     }
     sw.tintColor = [UIColor lightGrayColor];
     sw.onTintColor = [UIColor clearColor];
-    sw.thumbTintColor = [UIColor yellowColor];
+    sw.thumbTintColor = [[UIColor yellowColor] colorWithAlphaComponent:0.5];
     sw.backgroundColor = [UIColor clearColor];
     sw.translatesAutoresizingMaskIntoConstraints = NO;
     [sw addTarget:self action:@selector(xy_switchValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:sw];
+    if (@available(iOS 11.0, *)) {
+        [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.safeAreaLayoutGuide attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0].active = YES;
+    }
+    else {
+        [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-0.0].active = YES;
+    }
     [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:3.0].active = YES;
-    
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-5.0].active = YES;
     [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];
     return self;
 }
