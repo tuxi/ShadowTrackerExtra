@@ -47,7 +47,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>aaa</string>
+	<string>com.tencent.tmgp.pubgm</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

@@ -753,7 +753,7 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     else {
         [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-0.0].active = YES;
     }
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:3.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.safeAreaLayoutGuide attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-10.0].active = YES;
     [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];
     return self;
 }
