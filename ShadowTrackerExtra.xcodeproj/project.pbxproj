@@ -12,6 +12,7 @@
 		D06F6C9120CA291A00209DA6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D06F6C9020CA291A00209DA6 /* README.md */; };
 		D098365F20B5534A00283D1D /* XYMetalRenderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */; };
 		D098366020B5534A00283D1D /* XYMetalRenderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */; };
+		D0A049BF2175C9360083E100 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A049BD2175C2910083E100 /* AVFoundation.framework */; };
 		D0AF47F620CA67B40095FFE2 /* XYSuspensionMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = D0AF47F420CA67B30095FFE2 /* XYSuspensionMenu.h */; };
 		D0AF47F720CA67B40095FFE2 /* XYSuspensionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AF47F520CA67B40095FFE2 /* XYSuspensionMenu.m */; };
 		D0BB447620C4DF0000F0F36E /* XYSliderView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BB447420C4DEFF00F0F36E /* XYSliderView.h */; };
@@ -68,6 +69,7 @@
 		D06F6C9020CA291A00209DA6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D098365D20B5534A00283D1D /* XYMetalRenderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYMetalRenderHelper.h; sourceTree = "<group>"; };
 		D098365E20B5534A00283D1D /* XYMetalRenderHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYMetalRenderHelper.m; sourceTree = "<group>"; };
+		D0A049BD2175C2910083E100 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D0AF47F420CA67B30095FFE2 /* XYSuspensionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSuspensionMenu.h; sourceTree = "<group>"; };
 		D0AF47F520CA67B40095FFE2 /* XYSuspensionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSuspensionMenu.m; sourceTree = "<group>"; };
 		D0BB447420C4DEFF00F0F36E /* XYSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSliderView.h; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0A049BF2175C9360083E100 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +187,7 @@
 		D0E48D9120B2B4E0001E2815 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0A049BD2175C2910083E100 /* AVFoundation.framework */,
 				D0E48D9220B2B4E0001E2815 /* JavaScriptCore.framework */,
 				D0E48D9420B2B4E0001E2815 /* Foundation.framework */,
 				D0E48D9620B2B4E0001E2815 /* UIKit.framework */,
@@ -705,10 +709,10 @@
 				);
 				INFOPLIST_FILE = ShadowTrackerExtra/Info.plist;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
-				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_DEFAULT_BUNDLEID = YES;
 				MONKEYDEV_INSERT_DYLIB = YES;
-				MONKEYDEV_RESTORE_SYMBOL = YES;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
 				MONKEYDEV_TARGET_APP = Optional;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
@@ -730,10 +734,10 @@
 				);
 				INFOPLIST_FILE = ShadowTrackerExtra/Info.plist;
 				MONKEYDEV_ADD_SUBSTRATE = YES;
-				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_DEFAULT_BUNDLEID = YES;
 				MONKEYDEV_INSERT_DYLIB = YES;
-				MONKEYDEV_RESTORE_SYMBOL = YES;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
 				MONKEYDEV_TARGET_APP = Optional;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";

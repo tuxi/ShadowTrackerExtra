@@ -5,6 +5,7 @@
 #import <mach-o/dyld.h>
 #import "XYMetalRenderHelper.h"
 #import "XYSliderView.h"
+#import <AVFoundation/AVFAudio.h>
 
 extern void _log_classMethods(Class clas);
 extern void _hookAGXFamilyRenderContext(Class clas);
@@ -295,6 +296,121 @@ extern void _hookAGXFamilyRenderContext(Class clas);
     }
     return res;
 }
+%end
+
+%hook IOSAppDelegate
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    %orig;
+}
+
+- (void)ToggleSuspend:(_Bool)arg1 {
+    %orig;
+}
+- (_Bool)IsRunningOnBattery {
+    BOOL flag = %orig;
+    return flag;
+}
+- (int)GetBatteryLevel {
+    int flag = %orig;
+    return flag;
+}
+- (_Bool)AreHeadphonesPluggedIn {
+    BOOL flag = %orig;
+    return flag;
+}
+- (int)GetAudioVolume {
+    int flag = %orig;
+    return flag;
+}
+- (_Bool)IsBackgroundAudioPlaying {
+    BOOL flag = %orig;
+    return flag;
+}
+- (void)ToggleAudioSession:(_Bool)arg1 { // app进入前台和后台时 中调用
+    %orig;
+}
+- (void)InitializeAudioSession { // 初始化音频
+    %orig;
+    
+}
+- (void)AudioInterrupted:(NSNotification *)arg1 { // 收到音频中断的通知AVAudioSessionInterruptionNotification
+    %orig;
+}
+- (void)NoUrlCommandLine {
+    %orig;
+}
+- (void)EnableIdleTimer:(_Bool)arg1 {
+    %orig;
+}
+- (void)DeferredEnableIdleTimer {
+    %orig;
+}
+- (void)InitIdleTimerSettings {
+    %orig;
+}
+- (void)RecordPeakMemory {
+    %orig;
+}
+- (void)timerForSplashScreen {
+    %orig;
+}
+- (void)UE4iOSThread:(id)arg1 {
+    %orig;
+}
+- (void)MainAppThread:(id)arg1 {
+    %orig;
+}
+- (void)ParseCommandLineOverrides {
+    %orig;
+}
+%end
+/// hook AVAudioSession的目的是为了玩游戏时可以听apple music
+%hook AVAudioSession
+- (BOOL)setActive:(BOOL)active error:(NSError **)outError {
+    BOOL res = %orig;
+    return res;
+}
+- (BOOL)setActive:(BOOL)active withOptions:(AVAudioSessionSetActiveOptions)options error:(NSError **)outError {
+    BOOL res = %orig;
+    return res;
+}
+- (BOOL)setActive:(BOOL)active withFlags:(NSInteger)flags error:(NSError **)outError {
+    BOOL res = %orig;
+    return res;
+}
+
+/* set session category */
+- (BOOL)setCategory:(AVAudioSessionCategory)category error:(NSError **)outError {
+    category = AVAudioSessionCategoryAmbient;
+    BOOL res = %orig;
+    return res;
+}
+/* set session category with options */
+- (BOOL)setCategory:(AVAudioSessionCategory)category withOptions:(AVAudioSessionCategoryOptions)options error:(NSError **)outError {
+    category = AVAudioSessionCategoryAmbient;
+//    options = AVAudioSessionCategoryOptionMixWithOthers;
+    options = AVAudioSessionCategoryOptionDuckOthers; // 减弱其他app的背景音乐
+    BOOL res = %orig; // 全军出击app激活时设置的category为AVAudioSessionCategorySoloAmbient会知道apple music的音乐暂停
+    return res;
+}
+/* set session category and mode with options */
+- (BOOL)setCategory:(AVAudioSessionCategory)category mode:(AVAudioSessionMode)mode options:(AVAudioSessionCategoryOptions)options error:(NSError **)outError{
+    category = AVAudioSessionCategoryAmbient;
+    options = AVAudioSessionCategoryOptionDuckOthers;
+    BOOL res = %orig;
+    return res;
+}
+
+/* set session category, mode, routing sharing policy, and options
+ Use of the long-form route sharing policy is only valid in conjunction with a limited set of category, mode, and option values.
+ Allowed categories: AVAudioSessionCategoryPlayback
+ Allowed modes: AVAudioSessionModeDefault, AVAudioSessionModeMoviePlayback, AVAudioSessionModeSpokenAudio
+ Allowed options: None. Options are allowed when changing the routing policy back to Default, however. */
+- (BOOL)setCategory:(AVAudioSessionCategory)category mode:(AVAudioSessionMode)mode routeSharingPolicy:(AVAudioSessionRouteSharingPolicy)policy options:(AVAudioSessionCategoryOptions)options error:(NSError **)outError {
+    BOOL res = %orig;
+    return res;
+}
+
 %end
 %end
 
