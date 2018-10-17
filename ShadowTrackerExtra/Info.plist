@@ -194,6 +194,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>请求访问音乐库</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>App需要您的同意,才能访问蓝牙</string>
 	<key>NSCameraUsageDescription</key>

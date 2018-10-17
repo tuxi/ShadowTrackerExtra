@@ -6,6 +6,7 @@
 #import "XYMetalRenderHelper.h"
 #import "XYSliderView.h"
 #import <AVFoundation/AVFAudio.h>
+#import "XYPlayMusicViewController.h"
 
 extern void _log_classMethods(Class clas);
 extern void _hookAGXFamilyRenderContext(Class clas);
@@ -381,22 +382,22 @@ extern void _hookAGXFamilyRenderContext(Class clas);
 
 /* set session category */
 - (BOOL)setCategory:(AVAudioSessionCategory)category error:(NSError **)outError {
-    category = AVAudioSessionCategoryAmbient;
+//    category = AVAudioSessionCategoryAmbient;
     BOOL res = %orig;
     return res;
 }
 /* set session category with options */
 - (BOOL)setCategory:(AVAudioSessionCategory)category withOptions:(AVAudioSessionCategoryOptions)options error:(NSError **)outError {
-    category = AVAudioSessionCategoryAmbient;
+//    category = AVAudioSessionCategoryAmbient;
 //    options = AVAudioSessionCategoryOptionMixWithOthers;
-    options = AVAudioSessionCategoryOptionDuckOthers; // 减弱其他app的背景音乐
+//    options = AVAudioSessionCategoryOptionDuckOthers; // 减弱其他app的背景音乐
     BOOL res = %orig; // 全军出击app激活时设置的category为AVAudioSessionCategorySoloAmbient会知道apple music的音乐暂停
     return res;
 }
 /* set session category and mode with options */
 - (BOOL)setCategory:(AVAudioSessionCategory)category mode:(AVAudioSessionMode)mode options:(AVAudioSessionCategoryOptions)options error:(NSError **)outError{
-    category = AVAudioSessionCategoryAmbient;
-    options = AVAudioSessionCategoryOptionDuckOthers;
+//    category = AVAudioSessionCategoryAmbient;
+//    options = AVAudioSessionCategoryOptionDuckOthers;
     BOOL res = %orig;
     return res;
 }
@@ -816,6 +817,7 @@ static void * XYSliderViewKey = &XYSliderViewKey;
 
 @interface FIOSView : UIView
 - (void)xy_switchValueChanged:(id)sender;
+- (void)onPickMusic;
 - (UIImpactFeedbackGenerator *)feedbackGenerator;
 @end
 
@@ -869,10 +871,24 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     else {
         [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-0.0].active = YES;
     }
-    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.safeAreaLayoutGuide attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-10.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:sw attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-15.0].active = YES;
     [sw setTransform:CGAffineTransformScale(sw.transform, 0.7, 0.7)];
+    
+    // 播放音乐
+    UIButton *selectMusicBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    selectMusicBtn.layer.cornerRadius = 7.5;
+    selectMusicBtn.layer.masksToBounds = YES;
+    [self addSubview:selectMusicBtn];
+    selectMusicBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    selectMusicBtn.backgroundColor = [UIColor redColor];
+    [selectMusicBtn addTarget:self action:@selector(onPickMusic) forControlEvents:UIControlEventTouchUpInside];
+    [NSLayoutConstraint constraintWithItem:selectMusicBtn attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-10.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:selectMusicBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-50.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:selectMusicBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:15.0].active = YES;
+    [NSLayoutConstraint constraintWithItem:selectMusicBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:15.0].active = YES;
     return self;
 }
+
 
 //#if HAS_METAL
 //// Return a drawable object (ie a back buffer texture) for the RHI to render to
@@ -906,6 +922,12 @@ static void * XYSliderViewKey = &XYSliderViewKey;
     else {
         slider.hidden = YES;
     }
+}
+
+%new
+- (void)onPickMusic {
+    XYPlayMusicViewController *vc = [XYPlayMusicViewController new];
+    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:vc animated:YES completion:nil];
 }
 %end
 %end

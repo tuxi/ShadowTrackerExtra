@@ -36,39 +36,8 @@ CHConstructor{
         }
 #endif
         
-        
-//        NSLog(@"Current Category:%@", [AVAudioSession sharedInstance].category);
-//        NSError *error1 = nil;
-//        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error1];
-//        if (nil != error1) {
-//            NSLog(@"set Category error %@", error1.localizedDescription);
-//        }
-//        NSLog(@"Current Category:%@", [AVAudioSession sharedInstance].category);
-//        AVAudioSessionCategoryOptions options = [[AVAudioSession sharedInstance] categoryOptions];
-//        NSLog(@"Category[%@] has %lu options",  [AVAudioSession sharedInstance].category, options);
-//        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&error1];
-//        if (nil != error1) {
-//            NSLog(@"set Option error %@", error1.localizedDescription);
-//        }
-//        options = [[AVAudioSession sharedInstance] categoryOptions];
-//        NSLog(@"Category[%@] has %lu options",  [AVAudioSession sharedInstance].category, options);
-        
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            /*
-//             * 继续播放后台背景音乐, 取消激活当前应用的audio session
-//             * @param error 设置失败时的错误信息
-//             **/
-//            //Deactivate audio session in current app
-//            //Activate audio session in others' app depending on wether they listen to the Category changed
-//            //See here https://developer.apple.com/library/content/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/AudioGuidelinesByAppType/AudioGuidelinesByAppType.html#//apple_ref/doc/uid/TP40007875-CH11-SW1
-//            NSError *error = nil;
-//            [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:&error];
-//            NSLog(@"%@", error);
-//        });
-    }];
 }
 
 CHDeclareClass(CustomViewController)
