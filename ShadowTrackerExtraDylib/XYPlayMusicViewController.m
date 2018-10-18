@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) MPMediaPickerController *mpPickerVC;
 @property (strong, nonatomic)  UISlider * slider;
+
 @end
 
 @implementation XYPlayMusicViewController
@@ -36,7 +37,7 @@
     [playBtn addTarget:self action:@selector(onPlay:) forControlEvents:UIControlEventTouchUpInside];
     [NSLayoutConstraint constraintWithItem:playBtn attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:-10.0].active = YES;
     [NSLayoutConstraint constraintWithItem:playBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0].active = YES;
-    playBtn.selected = [XYPlayMusicManager manager].player.isPlaying;
+    playBtn.selected = [XYPlayMusicManager manager].audioPlayer.isPlaying;
     
     UIButton *selectMusicBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:selectMusicBtn];
@@ -65,7 +66,7 @@
     _slider = slider;
     slider.minimumValue = 0.0;
     slider.maximumValue = 1.0;
-    slider.value = 0.3;
+    slider.value = [XYPlayMusicManager manager].volumeNum.doubleValue;
     [self.view addSubview:slider];
     [slider setContinuous:YES];
     slider.minimumTrackTintColor = [UIColor redColor];
@@ -80,7 +81,7 @@
 }
 
 - (void)sliderValueChanged:(UISlider *)slider {
-    [XYPlayMusicManager manager].player.volume = MIN(1.0, slider.value);
+    [XYPlayMusicManager manager].volumeNum = @(MIN(1.0, slider.value));
 }
 
 - (void)close {
@@ -97,7 +98,7 @@
 - (void)onPlay:(UIButton *)sender {
     NSLog(@"onPlay");
     sender.selected = !sender.isSelected;
-    [XYPlayMusicManager manager].player.volume = MIN(1.0, _slider.value);
+    [XYPlayMusicManager manager].audioPlayer.volume = MIN(1.0, _slider.value);
     if (sender.isSelected) {
         [[XYPlayMusicManager manager] play];
         
@@ -108,34 +109,24 @@
 
 #pragma mark MPMediaPickerControllerDelegate
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
-    NSString *title;
-    NSString *artist;
-    NSString *content;
-    NSURL *furl = nil;
+//    NSString *title;
+//    NSString *artist;
+//    NSURL *furl = nil;
     
-    for (MPMediaItem * item in [mediaItemCollection items]) {
-        furl = [item valueForKey:MPMediaItemPropertyAssetURL];
-        if (furl) {
-            title =  [item valueForKey:MPMediaItemPropertyTitle];
-            artist = [item valueForKey:MPMediaItemPropertyArtist];
-        }
-    }
+    NSArray *selectItems = [mediaItemCollection items];
+//    for (MPMediaItem * item in selectItems) {
+//        furl = [item valueForKey:MPMediaItemPropertyAssetURL];
+//        if (furl) {
+//            title =  [item valueForKey:MPMediaItemPropertyTitle];
+//            artist = [item valueForKey:MPMediaItemPropertyArtist];
+//        }
+//    }
     
-    NSError *error;
-    if (nil != furl) {
-        [XYPlayMusicManager manager].furl = furl;
-        content = title;
-        content = [content stringByAppendingFormat:@"\n %@", artist];
-        [XYPlayMusicManager manager].player = [[AVAudioPlayer alloc] initWithContentsOfURL:furl error:&error];
-//        [[XYPlayMusicManager manager].player play];
-//        [[XYPlayMusicManager manager].player pause];
-        if (nil != error) {
-            NSLog(@"initWithContentsOfURL with error %@", error.localizedDescription);
-            return ;
-        }
-        
-    }
-    
+    //获取本地音乐库文件 包含showsCloudItems
+    MPMediaQuery *mediaQueue = [MPMediaQuery songsQuery];
+    NSArray *allItems = [mediaQueue items];
+    NSInteger index = [allItems indexOfObject:selectItems.firstObject];
+    [[XYPlayMusicManager manager] playWithItems:allItems trackNumber:index];
     [mediaPicker dismissViewControllerAnimated:YES completion:^{
         NSLog(@"Successful pick and return ");
     }];
