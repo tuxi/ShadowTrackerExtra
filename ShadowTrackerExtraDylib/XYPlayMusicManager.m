@@ -159,13 +159,14 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSNumber *)volumeNum {
-    if (self.volumeNum) {
-        return self.volumeNum;
+    if (_volumeNum) {
+        return _volumeNum;
     }
     NSNumber *volumeNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"XYAudioVolumeNumKey"];
     if (volumeNum == nil) {
         volumeNum = @(0.3);
     }
+    _volumeNum = volumeNum;
     return volumeNum;
 }
 

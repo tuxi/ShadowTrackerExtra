@@ -516,6 +516,19 @@ extern void _hookAGXFamilyRenderContext(Class clas);
 //}
 %end
 
+%hook SAUserDefaults
++ (id)currentUserDefaults {
+    id obj = %orig;
+    return obj;
+}
+%end
+
+%hook SAAccountInfo
+- (id)avatarURL {
+    return %orig;
+}
+%end
+
 %hook BeaconEventModule
 + (id)sharedInstance {
     id instance = %orig;
